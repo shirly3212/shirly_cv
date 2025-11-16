@@ -24,20 +24,19 @@
         border-width: 0;
       }
       
-      /* --- DEFINITIVE PRINT STYLES --- */
+      /* --- FINAL, ULTRA-AGGRESSIVE PRINT STYLES --- */
       @media print {
-        /* --- A4 Page Setup & Global Styles --- */
         @page {
           size: A4;
-          margin: 1cm;
+          margin: 0.5cm; /* Drastically reduced margins */
         }
         
         html, body {
           width: 100%;
           height: auto !important;
           background: #fff !important;
-          font-size: 8pt !important; /* Aggressive font size reduction */
-          line-height: 1.3 !important; /* Tighten line height */
+          font-size: 7.5pt !important; /* EXTREMELY small base font */
+          line-height: 1.25 !important; /* Very tight line height */
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
         }
@@ -47,7 +46,6 @@
           margin: 0 !important;
         }
         
-        /* --- Main Wrapper & Layout --- */
         main {
           width: 100% !important;
           max-width: 100% !important;
@@ -56,83 +54,87 @@
           box-shadow: none !important;
           border-radius: 0 !important;
           border: none !important;
-          overflow: visible !important;
+          overflow: hidden !important;
         }
 
-        /* --- Header Compression --- */
         header {
-          padding: 0.5cm !important;
-          border-radius: 10px 10px 0 0 !important;
+          padding: 0.4cm !important;
+          border-radius: 8px 8px 0 0 !important;
+        }
+        
+        header .flex {
+          align-items: center !important;
         }
         
         header img {
-          width: 60px !important;
-          height: 60px !important;
+          width: 55px !important;
+          height: 55px !important;
           box-shadow: none !important;
         }
         
-        header h1 { font-size: 16pt !important; margin: 0 !important; }
-        header .text-xl { font-size: 10pt !important; }
-        header > p { font-size: 8pt !important; margin-top: 5px !important; }
-        header .grid { margin-top: 6px !important; font-size: 7.5pt !important; gap: 4px 12px !important; }
-        header .grid svg { width: 10px !important; height: 10px !important; }
+        header h1 { font-size: 15pt !important; margin: 0 !important; line-height: 1.1 !important; }
+        header .text-xl { font-size: 9pt !important; }
+        header > p { font-size: 7pt !important; margin-top: 4px !important; line-height: 1.3 !important;}
+        header .grid { margin-top: 5px !important; font-size: 7pt !important; gap: 2px 10px !important; }
+        header .grid svg { width: 9px !important; height: 9px !important; }
 
-        /* --- Two-Column Body Layout (CRITICAL FIX) --- */
         main > .grid {
           display: grid !important;
-          grid-template-columns: 38% 62% !important; /* Force the two columns */
+          grid-template-columns: 38% 62% !important;
           padding: 0 !important;
           gap: 0 !important;
-          border: 1px solid #e5e7eb;
+          border: 1px solid #e0e0e0;
           border-top: none;
-          border-radius: 0 0 10px 10px;
+          border-radius: 0 0 8px 8px;
         }
         
         aside, main > .grid > div {
-          padding: 0.6cm !important;
+          padding: 0.5cm !important;
         }
         
         aside {
-            border-right: 1px solid #e5e7eb !important;
+            border-right: 1px solid #e0e0e0 !important;
         }
 
-        /* --- General Content Compression --- */
-        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.2rem !important; }
+        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
         .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.8rem !important; }
-        h2 { font-size: 11pt !important; margin-bottom: 0.4cm !important; }
-        h3 { font-size: 9.5pt !important; }
-        .flex.items-center.space-x-3 { margin-bottom: 0.4cm !important; } /* SectionTitle wrapper */
-
-        /* --- Specific Section Adjustments --- */
-        .skill-tag { padding: 1px 6px !important; font-size: 7pt !important; margin: 1px !important; }
-        .education-item { margin-bottom: 0.3cm !important; padding-bottom: 0.3cm !important; border-bottom: none !important; }
-        .experience-item { margin-bottom: 0.4cm !important; }
-        .experience-item ul { margin-top: 0.2cm !important; }
-        .experience-item ul li { margin-bottom: 0.1cm !important; font-size: 8pt !important; }
         
-        /* --- Portfolio Section (CRITICAL FIX) --- */
+        .flex.items-center.space-x-3 { margin-bottom: 0.3cm !important; }
+        h2 { font-size: 10pt !important; letter-spacing: 0px !important;}
+        h2 span.h-8 { height: 1.5rem !important; }
+        
+        h3 { font-size: 8pt !important; line-height: 1.2 !important; }
+
+        .skill-tag { padding: 1px 5px !important; font-size: 6.5pt !important; margin: 1px !important; }
+        .education-item { margin-bottom: 0.25cm !important; padding-bottom: 0 !important; border-bottom: none !important; }
+        .education-item p { margin-top: 1px !important; }
+
+        .experience-item { margin-bottom: 0.3cm !important; }
+        .experience-item ul { margin-top: 0.15cm !important; }
+        .experience-item ul li { margin-bottom: 0.08cm !important; font-size: 7.5pt !important; }
+        .experience-item ul li svg { margin-top: 2px !important; }
+
         .portfolio-section-grid {
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
-            gap: 0.5cm !important;
-            margin-top: 0.4cm !important;
+            gap: 0.4cm !important;
+            margin-top: 0.3cm !important;
         }
         
         .portfolio-item .aspect-\[3\/4\] {
-          aspect-ratio: 1/1 !important; /* Force square images to save vertical space */
+          aspect-ratio: 1/1 !important;
         }
         
         .portfolio-item h3 {
-          margin-top: 0.2cm !important;
-          font-size: 8.5pt !important;
+          margin-top: 0.15cm !important;
+          font-size: 8pt !important;
         }
         
         .portfolio-item .text-md p {
-          font-size: 7.5pt !important;
+          font-size: 7pt !important;
           line-height: 1.2 !important;
         }
 
-        /* --- Hide Footer --- */
         footer { display: none !important; }
       }
     </style>
