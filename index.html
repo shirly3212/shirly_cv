@@ -24,98 +24,146 @@
         border-width: 0;
       }
       @media print {
-        /* --- Page Setup --- */
+        /* --- A4 Page Setup --- */
         @page {
-          size: A4;
-          margin: 0; /* Control margins on the body/main element */
+            size: A4;
+            margin: 0;
         }
 
         html, body {
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-          width: 210mm;
-          height: 297mm;
-          font-size: 9pt; /* Base font size */
-          background: white !important;
-          color: #333;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            width: 210mm;
+            height: 297mm;
+            font-size: 9pt; /* A good base size */
+            background: #fff !important;
         }
-        
-        /* --- Layout & Hiding unnecessary elements --- */
-        body > div:first-child { padding: 0 !important; }
-        body > div:first-child > div:first-child > footer { display: none !important; }
+
+        /* --- Hide unnecessary elements --- */
+        body > div > div > footer {
+            display: none !important;
+        }
+
+        /* --- Main Layout Container --- */
+        /* Remove padding from the wrapper div */
+        body > div:first-child {
+            padding: 0 !important;
+        }
         main {
-          width: 100% !important;
-          max-width: 100% !important;
-          height: 297mm !important; /* Force height */
-          margin: 0 !important;
-          padding: 1cm !important; /* A bit of margin */
-          box-shadow: none !important;
-          border-radius: 0 !important;
-          display: flex !important;
-          flex-direction: column !important;
-          overflow: hidden !important; /* Clip any minor overflow */
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important; /* Fill the body */
+            margin: 0 !important;
+            padding: 1cm !important; /* Uniform padding */
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important; /* CRITICAL: Prevent overflow */
         }
 
         /* --- Header Compression --- */
         header {
-          padding: 0.5cm 0.7cm !important;
-          border-radius: 8px 8px 0 0 !important;
+            padding: 0.5cm 0.7cm !important; /* Reduced padding */
+            flex-shrink: 0 !important; /* Prevent header from shrinking */
         }
-        header .flex { align-items: center !important; }
-        header img { width: 65px !important; height: 65px !important; }
-        header h1 { font-size: 20pt !important; line-height: 1 !important; }
-        header .text-xl { font-size: 11pt !important; margin-top: 0 !important; } /* Job title */
-        header > p {
-          font-size: 8pt !important;
-          line-height: 1.25 !important;
-          margin-top: 0.4rem !important;
+        header img {
+            width: 60px !important;
+            height: 60px !important;
         }
-        header .grid { 
-          margin-top: 0.5rem !important; 
-          gap: 0.1rem 0.8rem !important; 
-          font-size: 7.5pt !important; 
+        header h1 {
+            font-size: 18pt !important; /* Smaller name */
+            line-height: 1.1 !important;
+        }
+        header .text-xl { /* Job Title */
+            font-size: 10pt !important;
+            margin-top: 0 !important;
+        }
+        header > p { /* Summary */
+            font-size: 7.5pt !important;
+            line-height: 1.25 !important;
+            margin-top: 0.3rem !important;
+        }
+        header .grid { /* Contact info */
+            margin-top: 0.4rem !important;
+            gap: 0.1rem 0.6rem !important;
+            font-size: 7pt !important;
+        }
+        header .grid svg {
+            width: 12px !important;
+            height: 12px !important;
         }
 
         /* --- Two-Column Body Layout --- */
         main > .grid {
-          display: grid !important;
-          grid-template-columns: 34% 66% !important; /* Give more space to the right column */
-          flex-grow: 1 !important;
-          gap: 0 !important;
-          border-radius: 0 0 8px 8px !important;
-          border: 1px solid #eee;
-          border-top: none;
-          overflow: hidden !important; /* Important */
+            display: grid !important;
+            grid-template-columns: 35% 65% !important; /* Adjust column ratio */
+            flex-grow: 1 !important; /* Fill remaining space */
+            gap: 0 !important;
+            border: 1px solid #f0f0f0;
+            border-top: none;
+            border-radius: 0 0 1rem 1rem;
+            overflow: hidden !important;
+        }
+        aside, main > .grid > div {
+            padding: 0.6cm !important;
+        }
+        aside {
+            border-r: 1px solid #f0f0f0 !important;
+        }
+        
+        /* --- General Content Compression --- */
+        section {
+            page-break-inside: avoid !important;
+        }
+        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.8rem !important; } /* Space between sections */
+        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.4rem !important; } /* Space between items */
+        
+        h2 { font-size: 11pt !important; }
+        h3 { font-size: 8.5pt !important; }
+        p, li, span {
+            font-size: 7.5pt !important;
+            line-height: 1.3 !important;
+        }
+        .text-md { font-size: 8pt !important; }
+
+        /* --- Specific Section Adjustments --- */
+        /* Skills */
+        .skill-tag {
+            padding: 1px 6px !important;
+            font-size: 7pt !important;
         }
 
-        aside, main > .grid > div { padding: 0.6cm !important; }
-        aside { border-r: 1px solid #eee !important; }
-        
-        /* --- Content Compression --- */
-        section { page-break-inside: avoid !important; }
-        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; } /* Space between sections */
-        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem !important; } /* Space between items in a section */
-        h2 { font-size: 12pt !important; }
-        .flex > span.h-8 { height: 1.1em !important; }
-        h3 { font-size: 9pt !important; line-height: 1.2 !important; }
-        p, li, span { font-size: 8pt !important; line-height: 1.3 !important; }
-        .text-md { font-size: 8.5pt !important; }
-
-        /* Skills */
-        .flex-wrap.gap-2 { gap: 0.2rem !important; }
-        .skill-tag { padding: 0.05rem 0.4rem !important; font-size: 7pt !important; }
-
         /* Experience */
-        .experience-item { margin-bottom: 0 !important; }
-        ul.space-y-2 { margin-top: 0.2rem !important; display: flex !important; flex-direction: column !important; gap: 0.1rem !important; }
+        .experience-item { margin-bottom: 0.3rem !important; }
+        ul.space-y-2 {
+            margin-top: 0.2rem !important;
+            gap: 0.1rem !important;
+        }
         
+        /* Education */
+        .education-item { margin-bottom: 0.3rem !important; padding-bottom: 0.3rem !important; }
+        .education-item .text-sm { font-size: 7pt !important; }
+
         /* Portfolio */
-        section:last-child { margin-top: 1rem !important; }
-        .grid.gap-6 { gap: 0.5rem !important; margin-top: 0.4rem !important;}
-        .portfolio-item .aspect-\[3\/4\] { aspect-ratio: 1/1 !important; } /* Make them square to save height */
-        .portfolio-item h3 { margin-top: 0.2rem !important; font-size: 8.5pt !important; }
-        .portfolio-item .text-md { font-size: 7.5pt !important; }
-        .portfolio-item .text-md p { font-size: 7.5pt !important; line-height: 1.2 !important; }
+        main > .grid > div > div > section:last-child { /* Target portfolio section specifically */
+            margin-top: 0.8rem !important;
+        }
+        .grid.gap-6 { /* Portfolio grid */
+            gap: 0.5rem !important;
+            margin-top: 0.3rem !important;
+        }
+        .portfolio-item .aspect-\[3\/4\] {
+            aspect-ratio: 1/1 !important; /* Make images square to save critical vertical space */
+        }
+        .portfolio-item h3 {
+            margin-top: 0.2rem !important;
+            font-size: 8pt !important;
+        }
+        .portfolio-item .text-md p {
+            font-size: 7pt !important;
+            line-height: 1.2 !important;
+        }
       }
     </style>
     <!-- React and Babel for in-browser JSX transformation -->
