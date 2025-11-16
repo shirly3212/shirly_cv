@@ -24,17 +24,25 @@
         border-width: 0;
       }
       @media print {
+        @page {
+          size: A4;
+          margin: 1.5cm; /* Standard margin for a professional look */
+        }
+
         html, body {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-            font-size: 8pt !important; /* Aggressive base font size */
-            line-height: 1.2 !important; /* Tighten line height globally */
+            font-size: 9.5pt !important; /* A more readable base font size */
+            line-height: 1.3 !important;
             background: #fff !important;
+            width: 100% !important;
+            height: 100% !important;
         }
 
-        /* Remove unnecessary elements & page setup */
-        footer { display: none !important; }
+        /* Remove screen padding/margins to respect @page margins */
+        body.p-4, body.sm\:p-8 { padding: 0 !important; }
         .bg-\[\#f0f2f5\] { padding: 0 !important; min-height: 0 !important; }
+
         main {
             max-width: 100% !important;
             margin: 0 !important;
@@ -42,60 +50,50 @@
             border-radius: 0 !important;
             border: none !important;
         }
-        section { 
-            break-inside: avoid !important; /* Try to keep sections on one page */
-            page-break-inside: avoid !important;
-        }
-        
-        /* --- Aggressive Spacing Reduction --- */
+
+        footer { display: none !important; }
+        section { break-inside: avoid !important; }
+
+        /* --- Balanced Spacing and Sizing --- */
 
         /* Header */
-        header { padding: 0.75rem 1rem !important; }
-        header .w-28, header .h-28, header .sm\:w-32, header .sm\:h-32 {
-            width: 4.5rem !important;
-            height: 4.5rem !important;
-        }
-        header h1 { font-size: 1.8rem !important; margin-bottom: 0 !important; }
-        header p { margin-top: 0.2rem !important; }
+        header { padding: 1rem 1.5rem !important; }
+        header .w-28, header .h-28 { width: 6rem !important; height: 6rem !important; }
+        header h1 { font-size: 2.2rem !important; margin-bottom: 0.1rem !important; }
+        header p { margin-top: 0.3rem !important; font-size: 1em !important; }
         header p.text-white\/90 { /* Summary */
-            font-size: 0.9em !important; 
-            line-height: 1.25 !important;
-            margin-top: 0.5rem !important;
+            line-height: 1.35 !important; 
+            margin-top: 0.75rem !important; 
         }
-        header .grid { /* Contact info grid */
-            margin-top: 0.5rem !important;
-            gap: 0.1rem 1rem !important;
+        header .grid { /* Contact info */
+            margin-top: 0.75rem !important; 
+            gap: 0.2rem 1.2rem !important;
         }
-        
+
         /* Main Columns */
-        aside.p-8, div.p-8 { padding: 1rem !important; }
-        
-        /* Reduce vertical spacing between sections */
-        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.7rem !important; }
-        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.4rem !important; }
-        .mt-1 { margin-top: 0.1rem !important; }
-        .mt-2 { margin-top: 0.2rem !important; }
-        .mt-3 { margin-top: 0.3rem !important; }
-        .mt-4 { margin-top: 0.4rem !important; }
-        .mt-6 { margin-top: 0.6rem !important; }
-        
+        aside.p-8, div.p-8 { padding: 1.25rem !important; }
+
+        /* Spacing between sections */
+        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.25rem !important; }
+        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
+        .mt-6 { margin-top: 1rem !important; }
+        .mt-4 { margin-top: 0.8rem !important; }
+        .mt-3 { margin-top: 0.5rem !important; }
+
         /* Section Titles */
-        h2.text-2xl { font-size: 1.1rem !important; }
-        span.h-8 { height: 1.1rem !important; }
-        
-        /* Item-specific font sizes and margins */
-        h3.text-lg { font-size: 1em !important; }
-        p.text-md, p.text-sm, span.text-sm { font-size: 0.9em !important; }
-        
+        h2.text-2xl { font-size: 1.5rem !important; }
+        span.h-8 { height: 1.5rem !important; }
+
+        /* Item-specific font sizes */
+        h3.text-lg { font-size: 1.1em !important; }
+        p.text-md, p.text-sm, span.text-sm { font-size: 1em !important; }
+
         /* Experience List */
-        ul.space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.1rem !important; }
-        
+        ul.space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.3rem !important; }
+
         /* Portfolio */
-        .grid.gap-6 { gap: 0.5rem !important; }
-        .aspect-\[3\/4\] { aspect-ratio: 4/3 !important; } /* Make images landscape to save vertical space */
-        h3.mt-4.text-lg { font-size: 0.95em !important; }
-        .text-md.text-gray-600 { font-size: 0.85em !important; }
-        .text-md.text-gray-600 p { margin: 0 !important; line-height: 1.1 !important; }
+        .aspect-\[3\/4\] { aspect-ratio: 3/4 !important; } /* Restore original aspect ratio */
+        .grid.gap-6 { gap: 1rem !important; }
       }
     </style>
     <!-- React and Babel for in-browser JSX transformation -->
