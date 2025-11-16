@@ -27,30 +27,59 @@
         body {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+          font-size: 9pt; /* Reduce base font size to fit more content */
         }
 
-        /* Remove page padding to utilize full A4 width */
+        /* Basic page setup for print */
         .bg-\[\#f0f2f5\] {
           padding: 0 !important;
+          min-height: auto !important;
         }
-        
-        /* Hide footer in print view */
-        footer {
-          display: none !important;
-        }
-        
-        /* Expand main content to fit page and remove shadow */
+        footer { display: none !important; }
         main {
           max-width: 100% !important;
           margin: 0 !important;
           box-shadow: none !important;
           border-radius: 0 !important;
+          border: none !important;
         }
+        section { break-inside: avoid; }
+
+        /* --- Compact Layout Overrides --- */
         
-        /* Prevent awkward page breaks */
-        section, .space-y-6 > div, .space-y-8 > div {
-          break-inside: avoid;
+        /* Header */
+        header { padding: 1.5rem !important; }
+        header h1 { font-size: 2.25rem !important; } /* was 4xl */
+        header .w-28, header .h-28, header .sm\:w-32, header .sm\:h-32 {
+            width: 6rem !important;
+            height: 6rem !important;
         }
+        header p, header a, header span {
+            font-size: 1em !important; /* Relative to body's 9pt */
+            line-height: 1.4 !important;
+        }
+        header .mt-6 { margin-top: 1rem !important; }
+
+        /* Main Columns */
+        aside.p-8, div.p-8 { padding: 1.5rem !important; }
+
+        /* Reduce vertical spacing between sections */
+        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.25rem !important; }
+        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
+        .mt-4 { margin-top: 0.75rem !important; }
+        .mt-6 { margin-top: 1rem !important; }
+
+        /* Reduce Section Title size */
+        h2.text-2xl { font-size: 1.4rem !important; }
+        span.h-8 { height: 1.4rem !important; }
+
+        /* Reduce list item spacing in Experience section */
+        ul.space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem !important; }
+
+        /* Reduce Portfolio Highlights spacing */
+        .grid.gap-6 { gap: 1rem !important; }
+        .aspect-\[3\/4\] { aspect-ratio: 1/1; } /* Make images square to save height */
+        h3.mt-4 { margin-top: 0.5rem !important; }
       }
     </style>
     <!-- React and Babel for in-browser JSX transformation -->
