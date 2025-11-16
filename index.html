@@ -27,128 +27,95 @@
         /* --- A4 Page & Color Setup --- */
         @page {
           size: A4;
-          margin: 0; /* Remove browser default margins */
+          margin: 0.7cm; /* Add some margin to the paper */
         }
         html, body {
-          width: 210mm;
-          height: 297mm; /* Force dimensions */
+          width: 100%;
+          height: 100%;
+          background: #fff !important;
+          font-size: 8pt; /* Reduced base font size */
+          line-height: 1.25;
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
-          background: #fff !important;
-          font-size: 8.5pt; /* Smaller base font */
-          line-height: 1.3;
-          overflow: hidden !important; /* CRITICAL */
+        }
+        body, #root {
+          padding: 0 !important;
+          margin: 0 !important;
         }
 
         /* --- Main Wrapper & Layout --- */
-        body > div:first-child { /* Targets the #root wrapper */
-            padding: 0 !important;
-        }
         main {
-            width: 100% !important;
-            max-width: 100% !important;
-            height: 100% !important;
-            margin: 0 !important;
-            padding: 1cm !important; /* Uniform padding on the page */
-            box-shadow: none !important;
-            border-radius: 0 !important;
-            display: flex !important;
-            flex-direction: column !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          border: 1px solid #eee;
         }
 
-        /* --- Header Compression --- */
+        /* --- Printer-Friendly Header --- */
         header {
-            padding: 0.5cm !important;
-            border-radius: 1rem 1rem 0 0 !important; /* Keep some style */
-            flex-shrink: 0; /* Prevent it from shrinking */
+          padding: 12px !important;
+          background: #fff !important; /* Remove gradient for printing */
+          color: #333 !important; /* Dark text for printing */
+          border-bottom: 1px solid #eee;
+        }
+        header h1, header p, header a, header span {
+          color: #333 !important;
         }
         header img {
-            width: 55px !important;
-            height: 55px !important;
+          width: 50px !important;
+          height: 50px !important;
+          border: 2px solid #ddd;
         }
-        header h1 {
-            font-size: 16pt !important;
-            line-height: 1 !important;
-        }
-        header .text-xl { /* Job Title */
-            font-size: 9pt !important;
-            margin-top: 0 !important;
-        }
-        header > p { /* Summary */
-            font-size: 7.5pt !important;
-            line-height: 1.2 !important;
-            margin-top: 0.25rem !important;
-        }
-        header .grid { /* Contact info */
-            margin-top: 0.3rem !important;
-            gap: 0.1rem 0.5rem !important;
-            font-size: 7pt !important;
-        }
-        header .grid svg {
-            width: 10px !important;
-            height: 10px !important;
-        }
+        header h1 { font-size: 16pt !important; }
+        header .text-xl { font-size: 10pt !important; }
+        header > p { font-size: 7.5pt !important; margin-top: 5px !important; }
+        header .grid { margin-top: 8px !important; gap: 4px 10px !important; font-size: 7.5pt !important; }
+        header .grid svg { width: 10px !important; height: 10px !important; }
 
         /* --- Two-Column Body Layout --- */
         main > .grid {
-            display: grid !important;
-            grid-template-columns: 35% 65% !important;
-            flex-grow: 1 !important; /* CRITICAL: Fill remaining space */
-            overflow: hidden !important; /* CRITICAL */
-            border: 1px solid #eee !important;
-            border-top: none !important;
-            border-radius: 0 0 1rem 1rem;
+          display: grid !important;
+          grid-template-columns: 35% 65% !important;
+          gap: 0 !important;
+          padding: 0 !important;
         }
         aside, main > .grid > div {
-            padding: 0.5cm !important;
-            overflow: hidden; /* Hide any minor overflow within columns */
+          padding: 12px !important;
         }
         aside { border-right: 1px solid #eee !important; }
-        
+
         /* --- General Content Compression --- */
-        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem !important; }
-        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.3rem !important; }
-        
-        h2 { font-size: 10pt !important; margin-bottom: 0.2rem !important; }
+        .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
+        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem !important; }
+        h2 { font-size: 10pt !important; margin-bottom: 5px !important; }
         h3 { font-size: 8pt !important; }
+        .flex.items-center.space-x-3 { margin-bottom: 5px !important; } /* SectionTitle wrapper */
 
         /* --- Specific Section Adjustments --- */
-        .skill-tag {
-            padding: 0px 5px !important;
-            font-size: 7pt !important;
-        }
-
-        .experience-item { margin-bottom: 0.25rem !important; }
-        .experience-item ul {
-            margin-top: 0.15rem !important;
-            space-y-2: 0 !important;
-            gap: 0.05rem !important;
-        }
-         .experience-item ul li { line-height: 1.2 !important; }
-
-        .education-item { margin-bottom: 0.2rem !important; padding-bottom: 0.2rem !important; border: none !important; }
+        .skill-tag { padding: 1px 6px !important; font-size: 7pt !important; margin: 1px !important; }
+        .education-item { margin-bottom: 5px !important; padding-bottom: 5px !important; border: none !important; }
+        .experience-item { margin-bottom: 6px !important; }
+        .experience-item ul { margin-top: 4px !important; }
+        .experience-item ul li { margin-bottom: 1px !important; }
         
-        /* --- Portfolio Section - THE KEY FIX --- */
-        main > .grid > div section:last-child { /* Portfolio section */
-          margin-top: 0.5rem !important;
-        }
-        .grid.gap-6 { /* Portfolio grid */
-            gap: 0.4rem !important;
-            margin-top: 0.2rem !important;
-        }
+        /* --- Portfolio Section: Make images smaller --- */
         .portfolio-item .aspect-\[3\/4\] {
-            aspect-ratio: 4/3 !important; /* LANDSCAPE IMAGES to save max vertical space */
+          aspect-ratio: 1/1 !important; /* SQUARE images to save vertical space */
         }
         .portfolio-item h3 {
-            margin-top: 0.15rem !important;
-            font-size: 7.5pt !important;
+          margin-top: 4px !important;
+          font-size: 7.5pt !important;
         }
         .portfolio-item .text-md p {
-            font-size: 6.5pt !important;
-            line-height: 1.1 !important;
+          font-size: 6.5pt !important;
+          line-height: 1.1 !important;
         }
 
-        /* --- Footer --- */
+        /* --- Hide Footer --- */
         footer { display: none !important; }
       }
     </style>
